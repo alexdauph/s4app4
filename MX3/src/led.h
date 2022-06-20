@@ -13,28 +13,28 @@
  */
 /* ************************************************************************** */
 
-#ifndef _LED_H    /* Guard against multiple inclusion */
+#ifndef _LED_H /* Guard against multiple inclusion */
 #define _LED_H
 
 #include "config.h"
 
-//LEDxSetValue fast access function macros
+// LEDxSetValue fast access function macros
 
 /* ------------------------------------------------------------ */
 /***	LEDxSetValue
 **
 **	Parameters:
-**      unsigned char bVal  - the value to be assigned to the specific LED: 
+**      unsigned char bVal  - the value to be assigned to the specific LED:
 **                                  0    : LD<x> is turned off
 **                                  1    : LD<x> is turned on
 **
 **	Return Value:
-**		
+**
 **
 **	Description:
-**		For each LED there is a macro function that provides the fastest way to set its value.  
-**      The bVal parameter specifies the value for the LED (0 for off, 1 for on). 
-**          
+**		For each LED there is a macro function that provides the fastest way to set its value.
+**      The bVal parameter specifies the value for the LED (0 for off, 1 for on).
+**
 */
 #define LEDS_Led0SetValue(val) lat_LEDS_LED0 = val
 #define LEDS_Led1SetValue(val) lat_LEDS_LED1 = val
@@ -52,25 +52,20 @@ void LED_SetValue(unsigned char bNo, unsigned char bVal);
 void LED_ToggleValue(unsigned char bNo);
 void LED_SetGroupValue(unsigned char bVal);
 
-//private functions:
-void LED_ConfigurePins();    
-
+// private functions:
+void LED_ConfigurePins();
 
 //#ifdef __cplusplus
-//extern "C" {
+// extern "C" {
 //#endif
 
+// *****************************************************************************
+// *****************************************************************************
+// Section: Interface Functions
+// *****************************************************************************
+// *****************************************************************************
 
-
-    // *****************************************************************************
-    // *****************************************************************************
-    // Section: Interface Functions
-    // *****************************************************************************
-    // *****************************************************************************
-
-
-
-    /* Provide C++ Compatibility */
+/* Provide C++ Compatibility */
 //#ifdef __cplusplus
 //}
 //#endif

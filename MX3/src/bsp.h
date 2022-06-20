@@ -15,7 +15,7 @@
  */
 /* ************************************************************************** */
 
-#ifndef _BSP_H    /* Guard against multiple inclusion */
+#ifndef _BSP_H /* Guard against multiple inclusion */
 #define _BSP_H
 
 #include <xc.h>
@@ -36,15 +36,13 @@
 
 /* TODO:  Include other files here if needed. */
 
-
 /* Provide C++ Compatibility */
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
-
- 
-    /* Provide C++ Compatibility */
+  /* Provide C++ Compatibility */
 #ifdef __cplusplus
 }
 #endif

@@ -15,36 +15,31 @@
  */
 /* ************************************************************************** */
 
-#ifndef _I2C_H    /* Guard against multiple inclusion */
+#ifndef _I2C_H /* Guard against multiple inclusion */
 #define _I2C_H
-
 
 void I2C_Init(unsigned int clockFreq);
 unsigned char I2C_Write(unsigned char slaveAddress,
-                        unsigned char* dataBuffer,
+                        unsigned char *dataBuffer,
                         unsigned char bytesNumber,
                         unsigned char stopBit);
 unsigned char I2C_Read(unsigned char slaveAddress,
-                    unsigned char* dataBuffer,
-                    unsigned char bytesNumber);
+                       unsigned char *dataBuffer,
+                       unsigned char bytesNumber);
 
 void I2C_Close();
 
 //#ifdef __cplusplus
-//extern "C" {
+// extern "C" {
 //#endif
 
+// *****************************************************************************
+// *****************************************************************************
+// Section: Interface Functions
+// *****************************************************************************
+// *****************************************************************************
 
-
-    // *****************************************************************************
-    // *****************************************************************************
-    // Section: Interface Functions
-    // *****************************************************************************
-    // *****************************************************************************
-
-
-
-    /* Provide C++ Compatibility */
+/* Provide C++ Compatibility */
 //#ifdef __cplusplus
 //}
 //#endif

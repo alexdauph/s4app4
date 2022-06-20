@@ -12,24 +12,22 @@
  */
 /* ************************************************************************** */
 
-#ifndef _SSD_H    /* Guard against multiple inclusion */
+#ifndef _SSD_H /* Guard against multiple inclusion */
 #define _SSD_H
 
 //#ifdef __cplusplus
-//extern "C" {
+// extern "C" {
 //#endif
 
-
-
-    // *****************************************************************************
-    // *****************************************************************************
-    // Section: Interface Functions
-    // *****************************************************************************
-    // *****************************************************************************
+// *****************************************************************************
+// *****************************************************************************
+// Section: Interface Functions
+// *****************************************************************************
+// *****************************************************************************
 
 void SSD_Init();
-void SSD_WriteDigits(unsigned char d0, unsigned char d1, unsigned char d2, unsigned char d3, \
-            unsigned char dp1, unsigned char dp2, unsigned char dp3, unsigned char dp4);
+void SSD_WriteDigits(unsigned char d0, unsigned char d1, unsigned char d2, unsigned char d3,
+                     unsigned char dp1, unsigned char dp2, unsigned char dp3, unsigned char dp4);
 void SSD_WriteDigitsGrouped(unsigned int val, unsigned char dp);
 unsigned char SSD_GetDigitSegments(unsigned char d);
 
@@ -37,8 +35,7 @@ unsigned char SSD_GetDigitSegments(unsigned char d);
 void SSD_ConfigurePins();
 void SSD_Timer4Setup();
 
-
-    /* Provide C++ Compatibility */
+/* Provide C++ Compatibility */
 //#ifdef __cplusplus
 //}
 //#endif

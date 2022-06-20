@@ -18,7 +18,7 @@
     are defined here for convenience.
 *******************************************************************************/
 
-//DOM-IGNORE-BEGIN
+// DOM-IGNORE-BEGIN
 /*******************************************************************************
 Copyright (c) 2013-2014 released Microchip Technology Inc.  All rights reserved.
 
@@ -41,11 +41,10 @@ CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST DATA, COST OF PROCUREMENT OF
 SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
  *******************************************************************************/
-//DOM-IGNORE-END
+// DOM-IGNORE-END
 
 #ifndef _UDP_H
 #define _UDP_H
-
 
 // *****************************************************************************
 // *****************************************************************************
@@ -79,24 +78,24 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 typedef enum
 {
-    UDP_TCPIP_WAIT_INIT,
+  UDP_TCPIP_WAIT_INIT,
 
-    /* In this state, the application waits for a IP Address */
-    UDP_TCPIP_WAIT_FOR_IP,
+  /* In this state, the application waits for a IP Address */
+  UDP_TCPIP_WAIT_FOR_IP,
 
-    UDP_TCPIP_OPENING_SERVER,
-    UDP_TCPIP_WAITING_FOR_COMMAND,
+  UDP_TCPIP_OPENING_SERVER,
+  UDP_TCPIP_WAITING_FOR_COMMAND,
 
-    UDP_TCPIP_WAIT_ON_DNS,
+  UDP_TCPIP_WAIT_ON_DNS,
 
-    UDP_TCPIP_WAIT_FOR_CONNECTION,
+  UDP_TCPIP_WAIT_FOR_CONNECTION,
 
-    UDP_TCPIP_SERVING_CONNECTION,
-    UDP_TCPIP_WAIT_FOR_RESPONSE,
+  UDP_TCPIP_SERVING_CONNECTION,
+  UDP_TCPIP_WAIT_FOR_RESPONSE,
 
-    UDP_TCPIP_CLOSING_CONNECTION,
+  UDP_TCPIP_CLOSING_CONNECTION,
 
-    UDP_TCPIP_ERROR,
+  UDP_TCPIP_ERROR,
 } UDP_STATES;
 
 // *****************************************************************************
@@ -114,18 +113,17 @@ typedef enum
 
 typedef struct
 {
-    /* The application's current state */
-    UDP_STATES              clientState;
-    UDP_STATES              serverState;
+  /* The application's current state */
+  UDP_STATES clientState;
+  UDP_STATES serverState;
 
-    /* TODO: Define any additional data used by the application. */
-    UDP_SOCKET              serverSocket;
-    UDP_SOCKET              clientSocket;
+  /* TODO: Define any additional data used by the application. */
+  UDP_SOCKET serverSocket;
+  UDP_SOCKET clientSocket;
 
-    uint64_t    mTimeOut;
+  uint64_t mTimeOut;
 
 } UDP_DATA;
-
 
 // *****************************************************************************
 // *****************************************************************************
@@ -133,9 +131,8 @@ typedef struct
 // *****************************************************************************
 // *****************************************************************************
 /* These routines are called by drivers when certain events occur.
-*/
+ */
 
-	
 // *****************************************************************************
 // *****************************************************************************
 // Section: Application Initialization and State Machine Functions
@@ -150,8 +147,8 @@ typedef struct
      MPLAB Harmony application initialization routine.
 
   Description:
-    This function initializes the Harmony application.  It places the 
-    application in its initial state and prepares it to run so that its 
+    This function initializes the Harmony application.  It places the
+    application in its initial state and prepares it to run so that its
     UDP_Tasks function can be called.
 
   Precondition:
@@ -173,8 +170,7 @@ typedef struct
     This routine must be called from the SYS_Initialize function.
 */
 
-void UDP_Initialize ( void );
-
+void UDP_Initialize(void);
 
 /*******************************************************************************
   Function:
@@ -206,11 +202,9 @@ void UDP_Initialize ( void );
     This routine must be called from SYS_Tasks() routine.
  */
 
-void UDP_Tasks ( void );
-
+void UDP_Tasks(void);
 
 #endif /* _UDP_H */
 /*******************************************************************************
  End of File
  */
-

@@ -18,7 +18,7 @@
     are defined here for convenience.
 *******************************************************************************/
 
-//DOM-IGNORE-BEGIN
+// DOM-IGNORE-BEGIN
 /*******************************************************************************
 Copyright (c) 2013-2014 released Microchip Technology Inc.  All rights reserved.
 
@@ -41,11 +41,10 @@ CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST DATA, COST OF PROCUREMENT OF
 SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
  *******************************************************************************/
-//DOM-IGNORE-END
+// DOM-IGNORE-END
 
 #ifndef _APP_H
 #define _APP_H
-
 
 // *****************************************************************************
 // *****************************************************************************
@@ -80,20 +79,19 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 typedef enum
 {
-    APP_TCPIP_WAIT_INIT,
-	/* Application's state machine's initial state. */
-    APP_TCPIP_WAIT_FOR_IP,
-    APP_TCPIP_WAITING_FOR_COMMAND,
-    APP_TCPIP_WAIT_ON_DNS,
+  APP_TCPIP_WAIT_INIT,
+  /* Application's state machine's initial state. */
+  APP_TCPIP_WAIT_FOR_IP,
+  APP_TCPIP_WAITING_FOR_COMMAND,
+  APP_TCPIP_WAIT_ON_DNS,
 
-    APP_TCPIP_WAIT_FOR_CONNECTION,
-	/* TODO: Define states used by the application state machine. */
-    APP_TCPIP_WAIT_FOR_RESPONSE,
+  APP_TCPIP_WAIT_FOR_CONNECTION,
+  /* TODO: Define states used by the application state machine. */
+  APP_TCPIP_WAIT_FOR_RESPONSE,
 
-    APP_TCPIP_CLOSING_CONNECTION,
-    APP_TCPIP_ERROR,
+  APP_TCPIP_CLOSING_CONNECTION,
+  APP_TCPIP_ERROR,
 } APP_STATES;
-
 
 // *****************************************************************************
 /* Application Data
@@ -110,16 +108,15 @@ typedef enum
 
 typedef struct
 {
-    /* The application's current state */
-    APP_STATES state;
+  /* The application's current state */
+  APP_STATES state;
 
-    /* TODO: Define any additional data used by the application. */
-    UDP_SOCKET              socket;
+  /* TODO: Define any additional data used by the application. */
+  UDP_SOCKET socket;
 
-    uint64_t    mTimeOut;
+  uint64_t mTimeOut;
 
 } APP_DATA;
-
 
 // *****************************************************************************
 // *****************************************************************************
@@ -127,9 +124,8 @@ typedef struct
 // *****************************************************************************
 // *****************************************************************************
 /* These routines are called by drivers when certain events occur.
-*/
+ */
 
-	
 // *****************************************************************************
 // *****************************************************************************
 // Section: Application Initialization and State Machine Functions
@@ -144,8 +140,8 @@ typedef struct
      MPLAB Harmony application initialization routine.
 
   Description:
-    This function initializes the Harmony application.  It places the 
-    application in its initial state and prepares it to run so that its 
+    This function initializes the Harmony application.  It places the
+    application in its initial state and prepares it to run so that its
     APP_Tasks function can be called.
 
   Precondition:
@@ -167,8 +163,7 @@ typedef struct
     This routine must be called from the SYS_Initialize function.
 */
 
-void APP_Initialize ( void );
-
+void APP_Initialize(void);
 
 /*******************************************************************************
   Function:
@@ -200,11 +195,9 @@ void APP_Initialize ( void );
     This routine must be called from SYS_Tasks() routine.
  */
 
-void APP_Tasks ( void );
-
+void APP_Tasks(void);
 
 #endif /* _APP_H */
 /*******************************************************************************
  End of File
  */
-

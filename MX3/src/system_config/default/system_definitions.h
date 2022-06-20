@@ -12,7 +12,7 @@
     Harmony project.
  *******************************************************************************/
 
-//DOM-IGNORE-BEGIN
+// DOM-IGNORE-BEGIN
 /*******************************************************************************
 Copyright (c) 2013-2014 released Microchip Technology Inc.  All rights reserved.
 
@@ -35,7 +35,7 @@ CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST DATA, COST OF PROCUREMENT OF
 SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
  *******************************************************************************/
-//DOM-IGNORE-END
+// DOM-IGNORE-END
 #ifndef _SYS_DEFINITIONS_H
 #define _SYS_DEFINITIONS_H
 
@@ -50,7 +50,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "system/common/sys_common.h"
 #include "system/common/sys_module.h"
 #include "system/devcon/sys_devcon.h"
-      #include "system/reset/sys_reset.h"
+#include "system/reset/sys_reset.h"
 #include "system/clk/sys_clk.h"
 #include "system/int/sys_int.h"
 #include "system/console/sys_console.h"
@@ -66,66 +66,65 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "driver/ethmac/drv_ethmac.h"
 #include "main.h"
 
-
 // DOM-IGNORE-BEGIN
-#ifdef __cplusplus  // Provide C++ Compatibility
+#ifdef __cplusplus // Provide C++ Compatibility
 
-extern "C" {
+extern "C"
+{
 
 #endif
-// DOM-IGNORE-END
+  // DOM-IGNORE-END
 
-// *****************************************************************************
-// *****************************************************************************
-// Section: Type Definitions
-// *****************************************************************************
-// *****************************************************************************
+  // *****************************************************************************
+  // *****************************************************************************
+  // Section: Type Definitions
+  // *****************************************************************************
+  // *****************************************************************************
 
-// *****************************************************************************
-/* System Objects
+  // *****************************************************************************
+  /* System Objects
 
-  Summary:
-    Structure holding the system's object handles
+    Summary:
+      Structure holding the system's object handles
 
-  Description:
-    This structure contains the object handles for all objects in the
-    MPLAB Harmony project's system configuration.
+    Description:
+      This structure contains the object handles for all objects in the
+      MPLAB Harmony project's system configuration.
 
-  Remarks:
-    These handles are returned from the "Initialize" functions for each module
-    and must be passed into the "Tasks" function for each module.
-*/
+    Remarks:
+      These handles are returned from the "Initialize" functions for each module
+      and must be passed into the "Tasks" function for each module.
+  */
 
-typedef struct
-{
-    SYS_MODULE_OBJ  sysTmr;
-    SYS_MODULE_OBJ  drvTmr0;
+  typedef struct
+  {
+    SYS_MODULE_OBJ sysTmr;
+    SYS_MODULE_OBJ drvTmr0;
 
-    SYS_MODULE_OBJ  drvUsart0;
-    SYS_MODULE_OBJ  sysConsole0;
+    SYS_MODULE_OBJ drvUsart0;
+    SYS_MODULE_OBJ sysConsole0;
 
     /*** SPI Object for Index 0 ***/
-    SYS_MODULE_OBJ				spiObjectIdx0;
-    SYS_MODULE_OBJ  tcpip;
+    SYS_MODULE_OBJ spiObjectIdx0;
+    SYS_MODULE_OBJ tcpip;
 
-} SYSTEM_OBJECTS;
+  } SYSTEM_OBJECTS;
 
-// *****************************************************************************
-// *****************************************************************************
-// Section: extern declarations
-// *****************************************************************************
-// *****************************************************************************
+  // *****************************************************************************
+  // *****************************************************************************
+  // Section: extern declarations
+  // *****************************************************************************
+  // *****************************************************************************
 
-extern SYSTEM_OBJECTS sysObj;
+  extern SYSTEM_OBJECTS sysObj;
 
-//DOM-IGNORE-BEGIN
+// DOM-IGNORE-BEGIN
 #ifdef __cplusplus
 }
 #endif
-//DOM-IGNORE-END
+// DOM-IGNORE-END
 
 #endif /* _SYS_DEFINITIONS_H */
 /*******************************************************************************
  End of File
 */
-
