@@ -1,30 +1,12 @@
-build/default/debug/_ext/1360937237/accel.o: ../src/accel.c \
- ../src/config.h ../src/i2c.h ../src/accel.h \
- ../src/system_config/default/system_definitions.h \
- ../src/system_config/default/framework/system/common/sys_common.h \
- ../src/system_config/default/framework/system/common/sys_module.h \
- ../src/system_config/default/framework/system/devcon/sys_devcon.h \
- ../src/system_config/default/framework/system/system.h \
- ../src/system_config/default/framework/system/reset/sys_reset.h \
- ../src/system_config/default/framework/system/reset/sys_reset_definitions_pic32m.h \
- ../src/system_config/default/framework/peripheral/reset/plib_reset.h \
- ../src/system_config/default/framework/peripheral/reset/processor/reset_processor.h \
- ../src/system_config/default/framework/peripheral/reset/processor/reset_p32xxxx.h \
- ../src/system_config/default/framework/peripheral/reset/processor/reset_p32mx370f512l.h \
- ../src/system_config/default/framework/peripheral/peripheral_common_32bit.h \
- ../src/system_config/default/framework/peripheral/peripheral_common.h \
- ../src/system_config/default/framework/peripheral/reset/processor/../templates/reset_ResetReasonStatus_MX_1.h \
- ../src/system_config/default/framework/peripheral/reset/processor/../templates/reset_SoftwareResetTrigger_Default.h \
- ../src/system_config/default/framework/peripheral/reset/processor/../templates/reset_ConfigRegReadError_Unsupported.h \
- ../src/system_config/default/framework/peripheral/reset/processor/../templates/reset_NmiControl_Unsupported.h \
- ../src/system_config/default/framework/peripheral/reset/processor/../templates/reset_WdtoInSleep_Unsupported.h \
- ../src/system_config/default/framework/peripheral/reset/processor/../templates/reset_NmiCounter_Unsupported.h \
- ../src/system_config/default/framework/system/clk/sys_clk.h \
+build/default/debug/_ext/1360937237/packet.o: ../src/packet.c \
+ ../src/packet.h ../src/UDP_app.h \
  ../src/system_config/default/system_config.h ../src/bsp.h \
  ../src/system_config/default/framework/peripheral/ports/plib_ports.h \
  ../src/system_config/default/framework/peripheral/ports/processor/ports_processor.h \
  ../src/system_config/default/framework/peripheral/ports/processor/ports_p32xxxx.h \
  ../src/system_config/default/framework/peripheral/ports/processor/ports_p32mx370f512l.h \
+ ../src/system_config/default/framework/peripheral/peripheral_common_32bit.h \
+ ../src/system_config/default/framework/peripheral/peripheral_common.h \
  ../src/system_config/default/framework/peripheral/ports/processor/../templates/ports_RemapInput_grouped1.h \
  ../src/system_config/default/framework/peripheral/ports/processor/../templates/ports_RemapOutput_PIC32_1.h \
  ../src/system_config/default/framework/peripheral/ports/processor/../templates/ports_PinMode_PPS.h \
@@ -50,6 +32,24 @@ build/default/debug/_ext/1360937237/accel.o: ../src/accel.c \
  ../src/system_config/default/framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeControl_Unsupported.h \
  ../src/system_config/default/framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeStatus_Unsupported.h \
  ../src/system_config/default/framework/peripheral/ports/plib_ports_compatibility.h \
+ ../src/system_config/default/system_definitions.h \
+ ../src/system_config/default/framework/system/common/sys_common.h \
+ ../src/system_config/default/framework/system/common/sys_module.h \
+ ../src/system_config/default/framework/system/devcon/sys_devcon.h \
+ ../src/system_config/default/framework/system/system.h \
+ ../src/system_config/default/framework/system/reset/sys_reset.h \
+ ../src/system_config/default/framework/system/reset/sys_reset_definitions_pic32m.h \
+ ../src/system_config/default/framework/peripheral/reset/plib_reset.h \
+ ../src/system_config/default/framework/peripheral/reset/processor/reset_processor.h \
+ ../src/system_config/default/framework/peripheral/reset/processor/reset_p32xxxx.h \
+ ../src/system_config/default/framework/peripheral/reset/processor/reset_p32mx370f512l.h \
+ ../src/system_config/default/framework/peripheral/reset/processor/../templates/reset_ResetReasonStatus_MX_1.h \
+ ../src/system_config/default/framework/peripheral/reset/processor/../templates/reset_SoftwareResetTrigger_Default.h \
+ ../src/system_config/default/framework/peripheral/reset/processor/../templates/reset_ConfigRegReadError_Unsupported.h \
+ ../src/system_config/default/framework/peripheral/reset/processor/../templates/reset_NmiControl_Unsupported.h \
+ ../src/system_config/default/framework/peripheral/reset/processor/../templates/reset_WdtoInSleep_Unsupported.h \
+ ../src/system_config/default/framework/peripheral/reset/processor/../templates/reset_NmiCounter_Unsupported.h \
+ ../src/system_config/default/framework/system/clk/sys_clk.h \
  ../src/system_config/default/framework/peripheral/osc/plib_osc.h \
  ../src/system_config/default/framework/peripheral/osc/processor/osc_processor.h \
  ../src/system_config/default/framework/peripheral/osc/processor/osc_p32xxxx.h \
@@ -357,54 +357,11 @@ build/default/debug/_ext/1360937237/accel.o: ../src/accel.c \
  ../src/system_config/default/framework/tcpip/tcpip_commands.h \
  ../src/system_config/default/framework/tcpip/tftps.h \
  ../src/system_config/default/framework/driver/ethmac/drv_ethmac.h \
- ../src/main.h ../src/lcd.h ../src/ssd.h ../src/packet.h ../src/UDP_app.h \
- ../src/app_commands.h
+ ../src/main.h ../src/app_commands.h
 
-../src/config.h:
+../src/packet.h:
 
-../src/i2c.h:
-
-../src/accel.h:
-
-../src/system_config/default/system_definitions.h:
-
-../src/system_config/default/framework/system/common/sys_common.h:
-
-../src/system_config/default/framework/system/common/sys_module.h:
-
-../src/system_config/default/framework/system/devcon/sys_devcon.h:
-
-../src/system_config/default/framework/system/system.h:
-
-../src/system_config/default/framework/system/reset/sys_reset.h:
-
-../src/system_config/default/framework/system/reset/sys_reset_definitions_pic32m.h:
-
-../src/system_config/default/framework/peripheral/reset/plib_reset.h:
-
-../src/system_config/default/framework/peripheral/reset/processor/reset_processor.h:
-
-../src/system_config/default/framework/peripheral/reset/processor/reset_p32xxxx.h:
-
-../src/system_config/default/framework/peripheral/reset/processor/reset_p32mx370f512l.h:
-
-../src/system_config/default/framework/peripheral/peripheral_common_32bit.h:
-
-../src/system_config/default/framework/peripheral/peripheral_common.h:
-
-../src/system_config/default/framework/peripheral/reset/processor/../templates/reset_ResetReasonStatus_MX_1.h:
-
-../src/system_config/default/framework/peripheral/reset/processor/../templates/reset_SoftwareResetTrigger_Default.h:
-
-../src/system_config/default/framework/peripheral/reset/processor/../templates/reset_ConfigRegReadError_Unsupported.h:
-
-../src/system_config/default/framework/peripheral/reset/processor/../templates/reset_NmiControl_Unsupported.h:
-
-../src/system_config/default/framework/peripheral/reset/processor/../templates/reset_WdtoInSleep_Unsupported.h:
-
-../src/system_config/default/framework/peripheral/reset/processor/../templates/reset_NmiCounter_Unsupported.h:
-
-../src/system_config/default/framework/system/clk/sys_clk.h:
+../src/UDP_app.h:
 
 ../src/system_config/default/system_config.h:
 
@@ -417,6 +374,10 @@ build/default/debug/_ext/1360937237/accel.o: ../src/accel.c \
 ../src/system_config/default/framework/peripheral/ports/processor/ports_p32xxxx.h:
 
 ../src/system_config/default/framework/peripheral/ports/processor/ports_p32mx370f512l.h:
+
+../src/system_config/default/framework/peripheral/peripheral_common_32bit.h:
+
+../src/system_config/default/framework/peripheral/peripheral_common.h:
 
 ../src/system_config/default/framework/peripheral/ports/processor/../templates/ports_RemapInput_grouped1.h:
 
@@ -467,6 +428,42 @@ build/default/debug/_ext/1360937237/accel.o: ../src/accel.c \
 ../src/system_config/default/framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeStatus_Unsupported.h:
 
 ../src/system_config/default/framework/peripheral/ports/plib_ports_compatibility.h:
+
+../src/system_config/default/system_definitions.h:
+
+../src/system_config/default/framework/system/common/sys_common.h:
+
+../src/system_config/default/framework/system/common/sys_module.h:
+
+../src/system_config/default/framework/system/devcon/sys_devcon.h:
+
+../src/system_config/default/framework/system/system.h:
+
+../src/system_config/default/framework/system/reset/sys_reset.h:
+
+../src/system_config/default/framework/system/reset/sys_reset_definitions_pic32m.h:
+
+../src/system_config/default/framework/peripheral/reset/plib_reset.h:
+
+../src/system_config/default/framework/peripheral/reset/processor/reset_processor.h:
+
+../src/system_config/default/framework/peripheral/reset/processor/reset_p32xxxx.h:
+
+../src/system_config/default/framework/peripheral/reset/processor/reset_p32mx370f512l.h:
+
+../src/system_config/default/framework/peripheral/reset/processor/../templates/reset_ResetReasonStatus_MX_1.h:
+
+../src/system_config/default/framework/peripheral/reset/processor/../templates/reset_SoftwareResetTrigger_Default.h:
+
+../src/system_config/default/framework/peripheral/reset/processor/../templates/reset_ConfigRegReadError_Unsupported.h:
+
+../src/system_config/default/framework/peripheral/reset/processor/../templates/reset_NmiControl_Unsupported.h:
+
+../src/system_config/default/framework/peripheral/reset/processor/../templates/reset_WdtoInSleep_Unsupported.h:
+
+../src/system_config/default/framework/peripheral/reset/processor/../templates/reset_NmiCounter_Unsupported.h:
+
+../src/system_config/default/framework/system/clk/sys_clk.h:
 
 ../src/system_config/default/framework/peripheral/osc/plib_osc.h:
 
@@ -1083,13 +1080,5 @@ build/default/debug/_ext/1360937237/accel.o: ../src/accel.c \
 ../src/system_config/default/framework/driver/ethmac/drv_ethmac.h:
 
 ../src/main.h:
-
-../src/lcd.h:
-
-../src/ssd.h:
-
-../src/packet.h:
-
-../src/UDP_app.h:
 
 ../src/app_commands.h:

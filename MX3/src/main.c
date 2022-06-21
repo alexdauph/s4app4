@@ -9,6 +9,7 @@
 #include "lcd.h"
 #include "app_commands.h"
 #include "rgbled.h"
+#include "packet.h"
 
 MAIN_DATA mainData;
 
@@ -29,8 +30,8 @@ void ManageSwitches()
   bool sw0_new = SWITCH0StateGet();
   if ((sw0_new != sw0_old) && sw0_new)
   {
-    // strcpy(UDP_Send_Buffer, "Bonjour S4\n\r");
-    // UDP_bytes_to_send = strlen(UDP_Send_Buffer);
+    strcpy(UDP_Send_Buffer_Ptr, "Bonjour S4\n\r");
+    UDP_bytes_to_send = strlen(UDP_Send_Buffer_Ptr);
     UDP_Send_Packet = true;
   }
 
@@ -62,6 +63,7 @@ void MAIN_Initialize(void)
   LCD_Init();
   ACL_Init();
   SSD_Init();
+  PKT_Init();
 }
 
 /******************************************************************************
@@ -103,6 +105,7 @@ void MAIN_Tasks(void)
     accel_tasks();
     UDP_Tasks();
     ManageSwitches();
+    PKT_Tasks();
     JB1Toggle();
     LED0Toggle();
     break;

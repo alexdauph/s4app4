@@ -357,7 +357,8 @@ build/default/production/_ext/1360937237/accel.o: ../src/accel.c \
  ../src/system_config/default/framework/tcpip/tcpip_commands.h \
  ../src/system_config/default/framework/tcpip/tftps.h \
  ../src/system_config/default/framework/driver/ethmac/drv_ethmac.h \
- ../src/main.h ../src/lcd.h ../src/ssd.h ../src/app_commands.h
+ ../src/main.h ../src/lcd.h ../src/ssd.h ../src/packet.h ../src/UDP_app.h \
+ ../src/app_commands.h
 
 ../src/config.h:
 
@@ -1086,5 +1087,9 @@ build/default/production/_ext/1360937237/accel.o: ../src/accel.c \
 ../src/lcd.h:
 
 ../src/ssd.h:
+
+../src/packet.h:
+
+../src/UDP_app.h:
 
 ../src/app_commands.h:

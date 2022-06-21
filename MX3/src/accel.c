@@ -36,6 +36,7 @@
 #include <stdio.h>
 #include "lcd.h"
 #include "ssd.h"
+#include "packet.h"
 #include "app_commands.h"
 
 /* ************************************************************************** */
@@ -72,8 +73,8 @@ void ACL_Init()
     ACL_SetRegister(ACL_CTRL_REG4, 1); // Output data rate at 800Hz, no auto wake, no auto scale adjust, no fast read mode
     ACL_SetRegister(ACL_CTRL_REG5, 0); // Output data rate at 800Hz, no auto wake, no auto scale adjust, no fast read mode
     ACL_GetRegister(ACL_INT_SOURCE);
-    ACL_SetRegister(ACL_CTRL_REG1, 0x38); // Output data rate at 800Hz, no auto wake, no auto scale adjust, no fast read mode
-    ACL_SetRegister(ACL_CTRL_REG1, 0x39); // Output data rate at 800Hz, no auto wake, no auto scale adjust, no fast read mode
+    ACL_SetRegister(ACL_CTRL_REG1, 0x08); // Output data rate at 800Hz, no auto wake, no auto scale adjust, no fast read mode
+    ACL_SetRegister(ACL_CTRL_REG1, 0x09); // Output data rate at 800Hz, no auto wake, no auto scale adjust, no fast read mode
 }
 
 /* ------------------------------------------------------------ */
@@ -106,12 +107,14 @@ void accel_tasks()
     {
         // ACL_ReadRawValues(accel_buffer);
 
+        signed short accelX, accelY, accelZ;
+        accelX = ((signed int)accel_buffer[0] << 24) >> 20 | accel_buffer[1] >> 4; // VR
+        accelY = ((signed int)accel_buffer[2] << 24) >> 20 | accel_buffer[3] >> 4; // VR
+        accelZ = ((signed int)accel_buffer[4] << 24) >> 20 | accel_buffer[5] >> 4; // VR
+        PKT_Add(accelX, accelY, accelZ);
+
         if (SWITCH1StateGet())
         {
-            signed short accelX, accelY, accelZ;
-            accelX = ((signed int)accel_buffer[0] << 24) >> 20 | accel_buffer[1] >> 4; // VR
-            accelY = ((signed int)accel_buffer[2] << 24) >> 20 | accel_buffer[3] >> 4; // VR
-            accelZ = ((signed int)accel_buffer[4] << 24) >> 20 | accel_buffer[5] >> 4; // VR
             SYS_CONSOLE_PRINT("%d,%d,%d\r\n", accelX, accelY, accelZ);
         }
         char outbuf[80];

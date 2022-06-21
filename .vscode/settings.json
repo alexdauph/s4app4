@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "packet.h": "c",
+        "stdbool.h": "c",
+        "system_config.h": "c"
+    }
+}
