@@ -346,11 +346,11 @@ void SYS_Initialize(void *data)
     sysObj.drvTmr0 = DRV_TMR_Initialize(DRV_TMR_INDEX_0, (SYS_MODULE_INIT *)&drvTmr0InitData);
 
     SYS_INT_VectorPrioritySet(INT_VECTOR_T1, INT_PRIORITY_LEVEL1);
-    SYS_INT_VectorSubprioritySet(INT_VECTOR_T1, INT_SUBPRIORITY_LEVEL0);
+    SYS_INT_VectorSubprioritySet(INT_VECTOR_T1, INT_SUBPRIORITY_LEVEL1);
 
     sysObj.drvUsart0 = DRV_USART_Initialize(DRV_USART_INDEX_0, (SYS_MODULE_INIT *)NULL);
     SYS_INT_VectorPrioritySet(INT_VECTOR_UART4, INT_PRIORITY_LEVEL1);
-    SYS_INT_VectorSubprioritySet(INT_VECTOR_UART4, INT_SUBPRIORITY_LEVEL0);
+    SYS_INT_VectorSubprioritySet(INT_VECTOR_UART4, INT_SUBPRIORITY_LEVEL1);
 
     /* Initialize System Services */
     SYS_PORTS_Initialize();

@@ -20,6 +20,23 @@ void PKT_Init(void)
 
 void PKT_Add(int val_x, int val_y, int val_z)
 {
+    unsigned int temp_x, temp_y, temp_z;
+
+    if (val_x < 0)
+        temp_x = (unsigned int)(-1 * val_x);
+    else
+        temp_x = (unsigned int)val_x;
+
+    if (val_y < 0)
+        temp_y = (unsigned int)(-1 * val_y);
+    else
+        temp_y = (unsigned int)val_y;
+    if (val_z < 0)
+        temp_z = (unsigned int)(-1 * val_z);
+    else
+        temp_z = (unsigned int)val_z;
+    RGBLED_SetValue((temp_x >> 4UL) & 0xFF, (temp_y >> 4UL) & 0xFF, (temp_z >> 4UL) & 0xFF);
+
     if (pkt_count == 0)
     {
         UDP_Build_Buffer_Ptr[0] = (pkt_index & 0xFF000000) >> 24UL;

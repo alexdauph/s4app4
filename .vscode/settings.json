@@ -2,6 +2,8 @@
     "files.associations": {
         "packet.h": "c",
         "stdbool.h": "c",
-        "system_config.h": "c"
+        "system_config.h": "c",
+        "drv_spi_internal.h": "c",
+        "sys_module.h": "c"
     }
 }

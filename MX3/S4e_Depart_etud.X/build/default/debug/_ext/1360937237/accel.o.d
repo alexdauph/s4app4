@@ -358,7 +358,7 @@ build/default/debug/_ext/1360937237/accel.o: ../src/accel.c \
  ../src/system_config/default/framework/tcpip/tftps.h \
  ../src/system_config/default/framework/driver/ethmac/drv_ethmac.h \
  ../src/main.h ../src/lcd.h ../src/ssd.h ../src/packet.h ../src/UDP_app.h \
- ../src/app_commands.h
+ ../src/rgbled.h ../src/app_commands.h
 
 ../src/config.h:
 
@@ -1091,5 +1091,7 @@ build/default/debug/_ext/1360937237/accel.o: ../src/accel.c \
 ../src/packet.h:
 
 ../src/UDP_app.h:
+
+../src/rgbled.h:
 
 ../src/app_commands.h:

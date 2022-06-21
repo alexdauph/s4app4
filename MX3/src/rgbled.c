@@ -64,7 +64,7 @@ void __ISR(_TIMER_5_VECTOR, IPL7AUTO) Timer5ISR(void)
 }
 
 // Timer period in seconds
-#define TMR_TIME 0.0003 // 300 us for each tick
+#define TMR_TIME 0.3 // 300 us for each tick
 
 /* ------------------------------------------------------------ */
 /***	Timer5Setup
@@ -119,33 +119,31 @@ void RGBLED_Init()
   lat_LED8_G = 0;
   lat_LED8_B = 0;
 
-  /*
-   // configure Timer2 - for PWM usage
-  T2CONbits.TCKPS = 3;                //            1:64 prescale value
-  T2CONbits.TGATE = 0;                //             not gated input (the default)
-  T2CONbits.TCS = 0;                  //             PCBLK input (the default)
-  T2CONbits.ON = 1;                   //             turn on Timer2
+  // configure Timer2 - for PWM usage
+  T2CONbits.TCKPS = 3; //            1:64 prescale value
+  T2CONbits.TGATE = 0; //             not gated input (the default)
+  T2CONbits.TCS = 0;   //             PCBLK input (the default)
+  T2CONbits.ON = 1;    //             turn on Timer2
 
   PR2 = 4096;
 
   // Configure Output Compare Module 3 - for PWM usage
- OC3CONbits.ON = 0;       // Turn off OC3 while doing setup.
- OC3CONbits.OCM = 6;      // PWM mode on OC3; Fault pin is disabled
- OC3CONbits.OCTSEL = 0;   // Timer2 is the clock source for this Output Compare module
- OC3CONbits.ON = 1;       // Start the OC3 module
+  OC3CONbits.ON = 0;     // Turn off OC3 while doing setup.
+  OC3CONbits.OCM = 6;    // PWM mode on OC3; Fault pin is disabled
+  OC3CONbits.OCTSEL = 0; // Timer2 is the clock source for this Output Compare module
+  OC3CONbits.ON = 1;     // Start the OC3 module
 
   // Configure Output Compare Module 4 - for PWM usage
- OC4CONbits.ON = 0;       // Turn off OC4 while doing setup.
- OC4CONbits.OCM = 6;      // PWM mode on OC4; Fault pin is disabled
- OC4CONbits.OCTSEL = 0;   // Timer2 is the clock source for this Output Compare module
- OC4CONbits.ON = 1;       // Start the OC4 module
+  OC4CONbits.ON = 0;     // Turn off OC4 while doing setup.
+  OC4CONbits.OCM = 6;    // PWM mode on OC4; Fault pin is disabled
+  OC4CONbits.OCTSEL = 0; // Timer2 is the clock source for this Output Compare module
+  OC4CONbits.ON = 1;     // Start the OC4 module
 
   // Configure Output Compare Module 5 - for PWM usage
- OC5CONbits.ON = 0;       // Turn off OC5 while doing setup.
- OC5CONbits.OCM = 6;      // PWM mode on OC5; Fault pin is disabled
- OC5CONbits.OCTSEL = 0;   // Timer2 is the clock source for this Output Compare module
- OC5CONbits.ON = 1;       // Start the OC5 module
-   */
+  OC5CONbits.ON = 0;     // Turn off OC5 while doing setup.
+  OC5CONbits.OCM = 6;    // PWM mode on OC5; Fault pin is disabled
+  OC5CONbits.OCTSEL = 0; // Timer2 is the clock source for this Output Compare module
+  OC5CONbits.ON = 1;     // Start the OC5 module
 }
 
 /* ------------------------------------------------------------ */
@@ -167,17 +165,17 @@ void RGBLED_ConfigurePins()
 {
   // Configure RGBLEDs as digital outputs.
 
-  //    rp_LED8_R = 0x0B; // LED8_R RPD2 is OC3 - for PWM usage
-  rp_LED8_R = 0;   // no remapable
+  rp_LED8_R = 0x0B; // LED8_R RPD2 is OC3 - for PWM usage
+  // rp_LED8_R = 0;   // no remapable
   tris_LED8_R = 0; // output
 
   // RPD12R 1011 = OC5
-  //   rp_LED8_G = 0x0B; // LED8_G RPD12 is OC5 - for PWM usage
-  rp_LED8_G = 0;   // no remapable
+  rp_LED8_G = 0x0B; // LED8_G RPD12 is OC5 - for PWM usage
+  // rp_LED8_G = 0;   // no remapable
   tris_LED8_G = 0; // output
 
-  //    rp_LED8_B = 0x0B; // LED8_B RPD3 is OC4 - for PWM usage
-  rp_LED8_B = 0;   // no remapable
+  rp_LED8_B = 0x0B; // LED8_B RPD3 is OC4 - for PWM usage
+  // rp_LED8_B = 0;   // no remapable
   tris_LED8_B = 0; // output
 
   // disable analog (set pins as digital))
@@ -203,17 +201,16 @@ void RGBLED_ConfigurePins()
 */
 void RGBLED_SetValue(unsigned char bValR, unsigned char bValG, unsigned char bValB)
 {
-  bColR = bValR;
-  bColG = bValG;
-  bColB = bValB;
-  /* - for PWM usage
+  // bColR = bValR;
+  // bColG = bValG;
+  // bColB = bValB;
+  //  - for PWM usage
   unsigned short wValR = bValR << 4;
   unsigned short wValG = bValG << 4;
   unsigned short wValB = bValB << 4;
   OC3RS = wValR;
   OC5RS = wValG;
   OC4RS = wValB;
-  */
 }
 
 /* ------------------------------------------------------------ */

@@ -64,6 +64,7 @@ void MAIN_Initialize(void)
   ACL_Init();
   SSD_Init();
   PKT_Init();
+  RGBLED_Init();
 }
 
 /******************************************************************************
@@ -108,6 +109,7 @@ void MAIN_Tasks(void)
     PKT_Tasks();
     JB1Toggle();
     LED0Toggle();
+    //
     break;
   }
 

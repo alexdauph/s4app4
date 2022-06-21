@@ -8,6 +8,7 @@
 #include "UDP_app.h"
 #include "system_config.h"
 #include "system_definitions.h"
+#include "rgbled.h"
 
 #define PKT_LEN 484
 #define PKT_X_OFFSET 4
