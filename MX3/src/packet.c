@@ -14,29 +14,13 @@ void PKT_Init(void)
 {
     pkt_index = 0;
     pkt_count = 0;
+    UDP_RX_Flag = false;
     UDP_Build_Buffer_Ptr = UDP_Buffer0;
     UDP_Send_Buffer_Ptr = UDP_Buffer1;
 }
 
 void PKT_Add(int val_x, int val_y, int val_z)
 {
-    unsigned int temp_x, temp_y, temp_z;
-
-    if (val_x < 0)
-        temp_x = (unsigned int)(-1 * val_x);
-    else
-        temp_x = (unsigned int)val_x;
-
-    if (val_y < 0)
-        temp_y = (unsigned int)(-1 * val_y);
-    else
-        temp_y = (unsigned int)val_y;
-    if (val_z < 0)
-        temp_z = (unsigned int)(-1 * val_z);
-    else
-        temp_z = (unsigned int)val_z;
-    RGBLED_SetValue((temp_x >> 4UL) & 0xFF, (temp_y >> 4UL) & 0xFF, (temp_z >> 4UL) & 0xFF);
-
     if (pkt_count == 0)
     {
         UDP_Build_Buffer_Ptr[0] = (pkt_index & 0xFF000000) >> 24UL;
@@ -65,6 +49,8 @@ void PKT_Add(int val_x, int val_y, int val_z)
 
 void PKT_Tasks(void)
 {
+    unsigned char val_x, val_y, val_z;
+
     if (pkt_count == 40 && appData.clientState == UDP_TCPIP_WAITING_FOR_COMMAND)
     {
         if (UDP_Build_Buffer_Ptr == UDP_Buffer0)
@@ -82,5 +68,15 @@ void PKT_Tasks(void)
         pkt_index++;
         UDP_bytes_to_send = PKT_LEN;
         UDP_Send_Packet = true;
+    }
+
+    if (UDP_RX_Flag)
+    {
+        UDP_RX_Flag = false;
+        val_x = (UDP_Receive_Buffer[0] << 24UL) | (UDP_Receive_Buffer[1] << 16UL) | (UDP_Receive_Buffer[2] << 8UL) | (UDP_Receive_Buffer[3] << 0UL);
+        val_y = (UDP_Receive_Buffer[4] << 24UL) | (UDP_Receive_Buffer[5] << 16UL) | (UDP_Receive_Buffer[6] << 8UL) | (UDP_Receive_Buffer[7] << 0UL);
+        val_z = (UDP_Receive_Buffer[8] << 24UL) | (UDP_Receive_Buffer[9] << 16UL) | (UDP_Receive_Buffer[10] << 8UL) | (UDP_Receive_Buffer[11] << 0UL);
+        RGBLED_SetValue((val_x >> 3UL) & 0xFF, (val_y >> 3UL) & 0xFF, (val_z >> 3UL) & 0xFF);
+        SYS_CONSOLE_PRINT("\r\nMX3 R(%d) | G(%d) | B(%d)", (val_x >> 3UL) & 0xFF, (val_y >> 3UL) & 0xFF, (val_z >> 3UL) & 0xFF);
     }
 }

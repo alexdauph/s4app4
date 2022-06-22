@@ -258,6 +258,8 @@ void _UDP_ClientTasks()
         uint16_t UDP_bytes_received = TCPIP_UDP_GetIsReady(appData.clientSocket);
         if (UDP_bytes_received)
         {
+            UDP_RX_Flag = true;
+
             TCPIP_UDP_ArrayGet(appData.clientSocket, (uint8_t *)UDP_Receive_Buffer, sizeof(UDP_Receive_Buffer) - 1);
             if (UDP_bytes_received > sizeof(UDP_Receive_Buffer) - 1)
             {

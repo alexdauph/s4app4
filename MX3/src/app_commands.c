@@ -74,6 +74,7 @@ bool UDP_Commands_Init()
     return true;
 }
 
+char UDP_RX_Flag;
 char UDP_Hostname_Buffer[MAX_URL_SIZE];
 char UDP_Port_Buffer[6];
 char UDP_Buffer0[MAX_PACKET_SIZE + 1];
