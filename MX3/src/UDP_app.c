@@ -142,9 +142,17 @@ void _UDP_ClientTasks()
         SYS_CMD_READY_TO_READ();
         if (UDP_Send_Packet)
         {
+
             TCPIP_DNS_RESULT result;
             UDP_Send_Packet = false;
             result = TCPIP_DNS_RES_NAME_IS_IPADDRESS; // TCPIP_DNS_Resolve(UDP_Hostname_Buffer, TCPIP_DNS_TYPE_A);
+
+            if (TCPIP_UDP_IsConnected(appData.clientSocket))
+            {
+                appData.clientState = UDP_TCPIP_WAIT_FOR_CONNECTION;
+                break;
+            }
+
             if (result == TCPIP_DNS_RES_NAME_IS_IPADDRESS)
             {
                 IPV4_ADDR addr;
@@ -167,6 +175,8 @@ void _UDP_ClientTasks()
             }
             appData.clientState = UDP_TCPIP_WAIT_ON_DNS;
         }
+        else
+            appData.clientState = UDP_TCPIP_WAIT_FOR_RESPONSE;
     }
     break;
 
@@ -215,9 +225,9 @@ void _UDP_ClientTasks()
             SYS_CONSOLE_MESSAGE("Client: No Space in Stack\r\n");
             break;
         }
-        //SYS_CONSOLE_PRINT("Avail %d\r\n", TCPIP_UDP_PutIsReady(appData.clientSocket));
-        //UDP_bytes_to_send = strlen(UDP_Send_Buffer_Ptr);
-        SYS_CONSOLE_PRINT("Client: Sending bytes : %d", UDP_bytes_to_send);
+        // SYS_CONSOLE_PRINT("Avail %d\r\n", TCPIP_UDP_PutIsReady(appData.clientSocket));
+        // UDP_bytes_to_send = strlen(UDP_Send_Buffer_Ptr);
+        SYS_CONSOLE_PRINT("\r\n\r\nClient: Sending bytes : %d", UDP_bytes_to_send);
         TCPIP_UDP_ArrayPut(appData.clientSocket, (uint8_t *)UDP_Send_Buffer_Ptr, UDP_bytes_to_send);
 
         // Envoie les donn�es (flush = envoie obligatoire des donn�es dans la pile, peu importe la quantit� de donn�es)
@@ -232,7 +242,7 @@ void _UDP_ClientTasks()
     {
         // char buffer[180];
         // memset(UDP_Receive_Buffer, 0, sizeof(UDP_Receive_Buffer));
-        if (SYS_TMR_SystemCountGet() > appData.mTimeOut)
+        /*if (SYS_TMR_SystemCountGet() > appData.mTimeOut)
         {
             SYS_CONSOLE_MESSAGE("\r\nClient: Timeout waiting for response\r\n");
             TCPIP_UDP_Close(appData.clientSocket);
@@ -244,7 +254,7 @@ void _UDP_ClientTasks()
             SYS_CONSOLE_MESSAGE("\r\nClient: Client Connection Closed\r\n");
             appData.clientState = UDP_TCPIP_WAITING_FOR_COMMAND;
             break;
-        }
+        }*/
         uint16_t UDP_bytes_received = TCPIP_UDP_GetIsReady(appData.clientSocket);
         if (UDP_bytes_received)
         {
@@ -256,13 +266,15 @@ void _UDP_ClientTasks()
                 UDP_bytes_received = sizeof(UDP_Receive_Buffer) - 1;
             }
             UDP_Receive_Buffer[UDP_bytes_received] = '\0'; // append a null to display strings properly
-            SYS_CONSOLE_PRINT("\r\nClient: Received bytes %d", UDP_bytes_received);
+            SYS_CONSOLE_PRINT("\r\nClient: Received bytes : %d", UDP_bytes_received);
 
             // Fermeture du socket
             appData.clientState = UDP_TCPIP_WAITING_FOR_COMMAND;
-            TCPIP_UDP_Close(appData.clientSocket);
-            SYS_CONSOLE_MESSAGE("\r\nClient: Closing connection\r\n");
+            // TCPIP_UDP_Close(appData.clientSocket);
+            // SYS_CONSOLE_MESSAGE("\r\nClient: Closing connection\r\n");
         }
+        else
+            appData.clientState = UDP_TCPIP_WAITING_FOR_COMMAND;
     }
     break;
 
@@ -357,11 +369,11 @@ void _UDP_ServerTasks(void)
                 UDP_Server_Receive_Buffer[rxed] = 0;
 
             SYS_CONSOLE_PRINT("\r\nServer: Received and sending bytes : %d", rxed);
-            //SYS_CONSOLE_PRINT("\r\nServer: \tServer Sending a messages: %s", UDP_Server_Receive_Buffer);
+            // SYS_CONSOLE_PRINT("\r\nServer: \tServer Sending a messages: %s", UDP_Server_Receive_Buffer);
 
             // Transfert les donn�es du tampon local au TCP TX FIFO.
             TCPIP_UDP_ArrayPut(appData.serverSocket, UDP_Server_Receive_Buffer, wCurrentChunk);
-            appData.serverState = UDP_TCPIP_CLOSING_CONNECTION;
+            // appData.serverState = UDP_TCPIP_CLOSING_CONNECTION;
         }
         // Envoie les donn�es (flush = envoie obligatoire des donn�es dans la pile, peu importe la quantit� de donn�es)
         TCPIP_UDP_Flush(appData.serverSocket);
