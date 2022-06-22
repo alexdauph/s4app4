@@ -147,8 +147,21 @@ void _UDP_ClientTasks()
             UDP_Send_Packet = false;
             result = TCPIP_DNS_RES_NAME_IS_IPADDRESS; // TCPIP_DNS_Resolve(UDP_Hostname_Buffer, TCPIP_DNS_TYPE_A);
 
+            if (UDP_Drop_Connection == true)
+            {
+                UDP_Drop_Connection = false;
+
+                if (UDP_Server_ID == 1)
+                    strcpy(UDP_Hostname_Buffer, "192.168.13.4");
+                else
+                    strcpy(UDP_Hostname_Buffer, "192.168.13.2");
+
+                TCPIP_UDP_Close(appData.clientSocket);
+            }
+
             if (TCPIP_UDP_IsConnected(appData.clientSocket))
             {
+                SYS_CONSOLE_MESSAGE("\r\nClient: Skipping connection");
                 appData.clientState = UDP_TCPIP_WAIT_FOR_CONNECTION;
                 break;
             }
@@ -164,7 +177,7 @@ void _UDP_ClientTasks()
                     SYS_CONSOLE_MESSAGE("\r\nClient: Could not start connection\r\n");
                     appData.clientState = UDP_TCPIP_WAITING_FOR_COMMAND;
                 }
-                SYS_CONSOLE_MESSAGE("\r\nClient: Starting connection\r\n");
+                SYS_CONSOLE_PRINT("\r\nClient: Starting connection to %s\r\n", UDP_Hostname_Buffer);
                 appData.clientState = UDP_TCPIP_WAIT_FOR_CONNECTION;
                 break;
             }
@@ -336,6 +349,8 @@ void _UDP_ServerTasks(void)
         }
         int16_t wMaxGet, wMaxPut, wCurrentChunk;
         uint16_t w;
+        unsigned char i;
+        static unsigned char rgb = 0;
         // Figure out how many bytes have been received and how many we can transmit.
         wMaxGet = TCPIP_UDP_GetIsReady(appData.serverSocket); // Get UDP RX FIFO byte count
         wMaxPut = TCPIP_UDP_PutIsReady(appData.serverSocket);
@@ -366,6 +381,13 @@ void _UDP_ServerTasks(void)
 
             // Transfert les donn�es du TCP TX FIFO au tampon local.
             int rxed = TCPIP_UDP_ArrayGet(appData.serverSocket, UDP_Server_Receive_Buffer, sizeof(UDP_Server_Receive_Buffer) - 1);
+
+            for (i = 0; i < 12; i++)
+                UDP_Server_Receive_Buffer[i] = 0;
+            UDP_Server_Receive_Buffer[(rgb * 4) + 2] = 0x07;
+            UDP_Server_Receive_Buffer[(rgb * 4) + 3] = 0xFF;
+            rgb = (rgb + 1) % 3;
+            rxed = 12;
 
             if (rxed < sizeof(UDP_Server_Receive_Buffer) - 1)
                 UDP_Server_Receive_Buffer[rxed] = 0;

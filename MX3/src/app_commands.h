@@ -68,6 +68,8 @@ extern "C"
 #define MAX_PACKET_SIZE 1536
   bool UDP_Commands_Init();
   extern char UDP_RX_Flag;
+  extern char UDP_Drop_Connection;
+  extern char UDP_Server_ID;
   extern char UDP_Hostname_Buffer[MAX_URL_SIZE];
   extern char UDP_Port_Buffer[6];
   extern char UDP_Buffer0[MAX_PACKET_SIZE + 1];

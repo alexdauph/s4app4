@@ -73,10 +73,10 @@ void PKT_Tasks(void)
     if (UDP_RX_Flag)
     {
         UDP_RX_Flag = false;
-        val_x = (UDP_Receive_Buffer[0] << 24UL) | (UDP_Receive_Buffer[1] << 16UL) | (UDP_Receive_Buffer[2] << 8UL) | (UDP_Receive_Buffer[3] << 0UL);
-        val_y = (UDP_Receive_Buffer[4] << 24UL) | (UDP_Receive_Buffer[5] << 16UL) | (UDP_Receive_Buffer[6] << 8UL) | (UDP_Receive_Buffer[7] << 0UL);
-        val_z = (UDP_Receive_Buffer[8] << 24UL) | (UDP_Receive_Buffer[9] << 16UL) | (UDP_Receive_Buffer[10] << 8UL) | (UDP_Receive_Buffer[11] << 0UL);
-        RGBLED_SetValue((val_x >> 3UL) & 0xFF, (val_y >> 3UL) & 0xFF, (val_z >> 3UL) & 0xFF);
-        SYS_CONSOLE_PRINT("\r\nMX3 R(%d) | G(%d) | B(%d)", (val_x >> 3UL) & 0xFF, (val_y >> 3UL) & 0xFF, (val_z >> 3UL) & 0xFF);
+        val_x = (UDP_Receive_Buffer[2] << 5UL) | (UDP_Receive_Buffer[3] >> 3UL);
+        val_y = (UDP_Receive_Buffer[6] << 5UL) | (UDP_Receive_Buffer[7] >> 3UL);
+        val_z = (UDP_Receive_Buffer[10] << 5UL) | (UDP_Receive_Buffer[11] >> 3UL);
+        RGBLED_SetValue(val_x & 0xFF, val_y & 0xFF, val_z & 0xFF);
+        SYS_CONSOLE_PRINT("\r\nMX3 R(%d) | G(%d) | B(%d)", val_x & 0xFF, val_y & 0xFF, val_z & 0xFF);
     }
 }

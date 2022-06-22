@@ -59,7 +59,10 @@ bool UDP_Commands_Init()
         SYS_ERROR(SYS_ERROR_ERROR, "Failed to create UDP Commands\r\n");
         return false;
     }
-    strcpy(UDP_Hostname_Buffer, "192.168.13.4");
+    if(SWITCH2StateGet() == 1)
+        strcpy(UDP_Hostname_Buffer, "192.168.13.4");
+    else
+        strcpy(UDP_Hostname_Buffer, "192.168.13.2");
     strcpy(UDP_Port_Buffer, "8080");
     memset(UDP_Receive_Buffer, 0, sizeof(UDP_Receive_Buffer));
     memset(UDP_Buffer0, 0, sizeof(UDP_Buffer0));
@@ -75,6 +78,8 @@ bool UDP_Commands_Init()
 }
 
 char UDP_RX_Flag;
+char UDP_Drop_Connection;
+char UDP_Server_ID;
 char UDP_Hostname_Buffer[MAX_URL_SIZE];
 char UDP_Port_Buffer[6];
 char UDP_Buffer0[MAX_PACKET_SIZE + 1];
