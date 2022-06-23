@@ -52,6 +52,9 @@ void PKT_Add(int val_x, int val_y, int val_z)
 void PKT_Tasks(void)
 {
     unsigned char val_x, val_y, val_z;
+    unsigned char i, j, k;
+    unsigned char val1, val0;
+    unsigned int offset;
 
     if (pkt_count == 40 && appData.clientState == UDP_TCPIP_WAITING_FOR_COMMAND)
     {
@@ -66,9 +69,43 @@ void PKT_Tasks(void)
             UDP_Send_Buffer_Ptr = UDP_Buffer1;
         }
 
-        if(pkt_print)
+        if (pkt_print)
         {
-            SYS_CONSOLE_PRINT("\r\nPrinting some stuff :)");
+            SYS_CONSOLE_PRINT("\r\n\r\n*** Buffer data ***");
+            val1 = UDP_Send_Buffer_Ptr[2];
+            val0 = UDP_Send_Buffer_Ptr[3];
+            SYS_CONSOLE_PRINT("\r\n[0] = 0x%02x%02x\t", val1, val0);
+
+            for (k = 0; k < 3; k++)
+            {
+                if (k == 0)
+                {
+                    SYS_CONSOLE_PRINT("\r\n* R *");
+                    offset = PKT_X_OFFSET;
+                }
+                if (k == 1)
+                {
+                    SYS_CONSOLE_PRINT("\r\n* G *");
+                    offset = PKT_Y_OFFSET;
+                }
+                if (k == 2)
+                {
+                    SYS_CONSOLE_PRINT("\r\n* B *");
+                    offset = PKT_Z_OFFSET;
+                }
+
+                for (i = 0; i < 10; i++)
+                {
+                    SYS_CONSOLE_PRINT("\r\n");
+                    for (j = 0; j < 4; j++)
+                    {
+                        val1 = UDP_Send_Buffer_Ptr[offset + 2 + (i << 2) + (j << 2)];
+                        val0 = UDP_Send_Buffer_Ptr[offset + 3 + (i << 2) + (j << 2)];
+
+                        SYS_CONSOLE_PRINT("[%d] = 0x%02x%02x\t", (offset >> 2) + (i * 4) + j, val1, val0);
+                    }
+                }
+            }
         }
 
         pkt_count = 0;
