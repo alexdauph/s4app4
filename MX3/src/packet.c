@@ -3,6 +3,7 @@
 
 unsigned int pkt_index = 0;
 unsigned int pkt_count = 0;
+unsigned int pkt_print = 0;
 // int pkt_buff0[PKT_LEN] = {0};
 // int pkt_buff1[PKT_LEN] = {0};
 // int *pkt_build_ptr = pkt_buff0;
@@ -14,6 +15,7 @@ void PKT_Init(void)
 {
     pkt_index = 0;
     pkt_count = 0;
+    pkt_print = 0;
     UDP_RX_Flag = false;
     UDP_Build_Buffer_Ptr = UDP_Buffer0;
     UDP_Send_Buffer_Ptr = UDP_Buffer1;
@@ -62,6 +64,11 @@ void PKT_Tasks(void)
         {
             UDP_Build_Buffer_Ptr = UDP_Buffer0;
             UDP_Send_Buffer_Ptr = UDP_Buffer1;
+        }
+
+        if(pkt_print)
+        {
+            SYS_CONSOLE_PRINT("\r\nPrinting some stuff :)");
         }
 
         pkt_count = 0;

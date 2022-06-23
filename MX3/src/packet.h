@@ -19,4 +19,6 @@ void PKT_Init(void);
 void PKT_Tasks(void);
 void PKT_Add(int val_x, int val_y, int val_z);
 
+extern unsigned int pkt_print;
+
 #endif /* _PKT_H */

@@ -26,24 +26,34 @@ static void LedTask(void)
 
 static bool sw0_old;
 static bool sw2_old;
+static bool sw3_old;
 void ManageSwitches()
 {
   bool sw0_new = SWITCH0StateGet();
   bool sw2_new = SWITCH2StateGet();
+  bool sw3_new = SWITCH3StateGet();
+
   if ((sw0_new != sw0_old) && sw0_new)
   {
     strcpy(UDP_Send_Buffer_Ptr, "Bonjour S4\n\r");
     UDP_bytes_to_send = strlen(UDP_Send_Buffer_Ptr);
     UDP_Send_Packet = true;
   }
-  if(sw2_new != sw2_old)
+
+  if (sw2_new != sw2_old)
+  {
+    pkt_print = sw2_new;
+  }
+
+  if (sw3_new != sw3_old)
   {
     UDP_Drop_Connection = true;
-    UDP_Server_ID = sw2_new;
+    UDP_Server_ID = sw3_new;
   }
 
   sw0_old = sw0_new;
   sw2_old = sw2_new;
+  sw3_old = sw3_new;
 }
 
 // *****************************************************************************

@@ -142,10 +142,11 @@ void _UDP_ClientTasks()
         SYS_CMD_READY_TO_READ();
         if (UDP_Send_Packet)
         {
-
             TCPIP_DNS_RESULT result;
             UDP_Send_Packet = false;
             result = TCPIP_DNS_RES_NAME_IS_IPADDRESS; // TCPIP_DNS_Resolve(UDP_Hostname_Buffer, TCPIP_DNS_TYPE_A);
+
+            SYS_CONSOLE_MESSAGE("\r\n----------------------");
 
             if (UDP_Drop_Connection == true)
             {
@@ -156,7 +157,8 @@ void _UDP_ClientTasks()
                 else
                     strcpy(UDP_Hostname_Buffer, "192.168.13.2");
 
-                TCPIP_UDP_Close(appData.clientSocket);
+                if (TCPIP_UDP_IsConnected(appData.clientSocket))
+                    TCPIP_UDP_Close(appData.clientSocket);
             }
 
             if (TCPIP_UDP_IsConnected(appData.clientSocket))
@@ -177,7 +179,7 @@ void _UDP_ClientTasks()
                     SYS_CONSOLE_MESSAGE("\r\nClient: Could not start connection\r\n");
                     appData.clientState = UDP_TCPIP_WAITING_FOR_COMMAND;
                 }
-                SYS_CONSOLE_PRINT("\r\nClient: Starting connection to %s\r\n", UDP_Hostname_Buffer);
+                SYS_CONSOLE_PRINT("\r\nClient: Starting connection to %s", UDP_Hostname_Buffer);
                 appData.clientState = UDP_TCPIP_WAIT_FOR_CONNECTION;
                 break;
             }
@@ -240,7 +242,7 @@ void _UDP_ClientTasks()
         }
         // SYS_CONSOLE_PRINT("Avail %d\r\n", TCPIP_UDP_PutIsReady(appData.clientSocket));
         // UDP_bytes_to_send = strlen(UDP_Send_Buffer_Ptr);
-        SYS_CONSOLE_PRINT("\r\n\r\nClient: Sending bytes : %d", UDP_bytes_to_send);
+        SYS_CONSOLE_PRINT("\r\nClient: Sending %d bytes to %s", UDP_bytes_to_send, UDP_Hostname_Buffer);
         TCPIP_UDP_ArrayPut(appData.clientSocket, (uint8_t *)UDP_Send_Buffer_Ptr, UDP_bytes_to_send);
 
         // Envoie les donn�es (flush = envoie obligatoire des donn�es dans la pile, peu importe la quantit� de donn�es)
@@ -281,7 +283,7 @@ void _UDP_ClientTasks()
                 UDP_bytes_received = sizeof(UDP_Receive_Buffer) - 1;
             }
             UDP_Receive_Buffer[UDP_bytes_received] = '\0'; // append a null to display strings properly
-            SYS_CONSOLE_PRINT("\r\nClient: Received bytes : %d", UDP_bytes_received);
+            SYS_CONSOLE_PRINT("\r\nClient: Received %d bytes", UDP_bytes_received);
 
             // Fermeture du socket
             appData.clientState = UDP_TCPIP_WAITING_FOR_COMMAND;
@@ -392,7 +394,7 @@ void _UDP_ServerTasks(void)
             if (rxed < sizeof(UDP_Server_Receive_Buffer) - 1)
                 UDP_Server_Receive_Buffer[rxed] = 0;
 
-            SYS_CONSOLE_PRINT("\r\nServer: Received and sending bytes : %d", rxed);
+            SYS_CONSOLE_PRINT("\r\nServer: Received frame and sending %d bytes", rxed);
             // SYS_CONSOLE_PRINT("\r\nServer: \tServer Sending a messages: %s", UDP_Server_Receive_Buffer);
 
             // Transfert les donn�es du tampon local au TCP TX FIFO.
